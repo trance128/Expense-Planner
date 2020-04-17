@@ -1,4 +1,0 @@
-#Fri Apr 17 01:27:16 BST 2020
-base.0=/home/ovid/Code/flutterapps/expensePlanner/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
