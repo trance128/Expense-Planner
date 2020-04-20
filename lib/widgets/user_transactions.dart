@@ -1,50 +1,29 @@
-import 'package:flutter/material.dart';
+/*
+Code has been refactored to no longer use This file.  I'm leaving 
+it in just in case.
+*/
 
-import '../models/transaction.dart';
-import './new_transaction.dart';
-import './transaction_list.dart';
+// import 'package:flutter/material.dart';
 
-class UserTransactions extends StatefulWidget {
-  @override
-  _UserTransactionsState createState() => _UserTransactionsState();
-}
+// import '../models/transaction.dart';
+// import './new_transaction.dart';
+// import './transaction_list.dart';
 
-class _UserTransactionsState extends State<UserTransactions> {
-  final List<Transaction> _userTransactions = [
-    Transaction(
-      id: "1",
-      title: "Flutter course",
-      amount: 19.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: "2",
-      title: "Bike insurance",
-      amount: 35.99,
-      date: DateTime.now(),
-    ),
-  ];
+// class UserTransactions extends StatefulWidget {
+//   @override
+//   _UserTransactionsState createState() => _UserTransactionsState();
+// }
 
-  void _addNewTransaction(String title, double amount) {
-    final newTx = Transaction(
-      title: title,
-      amount: amount,
-      date: DateTime.now(),
-      id: DateTime.now().toString(),
-    );
+// class _UserTransactionsState extends State<UserTransactions> {
+  
 
-    setState(() {
-      _userTransactions.add(newTx);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        NewTransaction(_addNewTransaction),
-        TransactionList(_userTransactions),
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: <Widget>[
+//         NewTransaction(_addNewTransaction),
+//         TransactionList(_userTransactions),
+//       ],
+//     );
+//   }
+// }
