@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './transaction.dart';
+
+import './widgets/user_transactions.dart';
 
 void main() => runApp(App());
 
@@ -14,10 +15,6 @@ class App extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
-    Transaction(id: "1", title: "Flutter course", amount: 19.99, date: DateTime.now(), ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +31,7 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          Card(
-            child: Text("List of transactions"),
-          ),
+          UserTransactions(),
         ],
       ),
     );
