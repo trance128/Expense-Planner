@@ -18,25 +18,29 @@ class _AppState extends State<App> {
     return MaterialApp(
       title: 'Expenses',
       theme: ThemeData(
-          primarySwatch: Colors.purple,
-          accentColor: Colors.amber,
-          fontFamily: 'Quicksand',
+        primarySwatch: Colors.purple,
+        accentColor: Colors.amber,
+        fontFamily: 'Quicksand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              title: TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+              button: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+        appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(
                   fontFamily: 'OpenSans',
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
                 ),
               ),
-          appBarTheme: AppBarTheme(
-            textTheme: ThemeData.light().textTheme.copyWith(
-                  title: TextStyle(
-                    fontFamily: 'OpenSans',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-          )),
+        ),
+      ),
       home: MyHomePage(),
     );
   }
@@ -51,20 +55,22 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [];
 
   List<Transaction> get _recentTransactions {
-    return _userTransactions.where((tx) {
-      return tx.date.isAfter(
-        DateTime.now().subtract(
-          Duration(days: 7),
-        ),
-      );
-    }).toList();
+    return _userTransactions.where(
+      (tx) {
+        return tx.date.isAfter(
+          DateTime.now().subtract(
+            Duration(days: 7),
+          ),
+        );
+      },
+    ).toList();
   }
 
-  void _addNewTransaction(String title, double amount) {
+  void _addNewTransaction(String title, double amount, DateTime date) {
     final newTx = Transaction(
       title: title,
       amount: amount,
-      date: DateTime.now(),
+      date: date,
       id: DateTime.now().toString(),
     );
 
@@ -75,10 +81,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _startAddNewTransaction(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        builder: (bCtx) {
-          return NewTransaction(_addNewTransaction);
-        });
+      context: context,
+      builder: (bCtx) {
+        return NewTransaction(_addNewTransaction);
+      },
+    );
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((tx) => tx.id == id);
+    },);
   }
 
   @override
@@ -96,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: <Widget>[
             Chart(_recentTransactions),
-            TransactionList(_userTransactions),
+            TransactionList(_userTransactions, _deleteTransaction),
           ],
         ),
       ),
